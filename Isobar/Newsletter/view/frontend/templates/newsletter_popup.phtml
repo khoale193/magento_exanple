@@ -1,0 +1,48 @@
+<?php
+/** @var \Isobar\Newsletter\Block\NewsletterPopup $block */
+?>
+
+<a data-fancybox data-src="#hidden-content-e" href="javascript:" id="isobar_newsletter_popup">Open demo</a>
+<div class="block newsletter isobar_newsletter" style="display:none;width:40%;text-align:center" id="hidden-content-e">
+    <div class="mfp-content">
+        <div class="popup-content mfp-with-anim">
+            <p><strong class="logo" style="margin-top:-30px">
+                <img class="logo-img" src="http://demo2.com/pub/static/version1509957501/frontend/Magento/luma/en_US/images/logo.svg" width="148" height="43">
+            </strong></p>
+            <p><strong><span style="font-size: medium;"><br></span></strong></p>
+            <p><strong><span style="font-size: x-large;">Stay in touch<br></span></strong></p>
+            <p><span style="font-family: arial,helvetica,sans-serif; font-size: medium;">Sign up to be the first one to know about upcoming deals and new collections!</span></p>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="content">
+        <form class="form subscribe"
+              novalidate
+              action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+              method="post"
+              data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+              id="newsletter-validate-detail">
+            <div class="field newsletter">
+                <div class="control">
+                    <input name="email" type="email" id="newsletter"
+                           placeholder="<?= $block->escapeHtmlAttr(__('Enter your email address')) ?>"
+                           data-validate="{required:true, 'validate-email':true}"/>
+                </div>
+            </div>
+            <div class="actions">
+                <button class="action subscribe primary" title="<?= $block->escapeHtmlAttr(__('Subscribe')) ?>" type="submit">
+                    <span><?= $block->escapeHtml(__('Subscribe')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    require([
+        'isobarNewsletterPopup'
+    ], function (isobarNewsletterPopup) {
+
+        isobarNewsletterPopup.displayTemplate('#isobar_newsletter_popup');
+    });
+</script>

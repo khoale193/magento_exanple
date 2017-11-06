@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Isobar_Newsletter::css/fancybox/jquery.fancybox.css"/>
+        <css src="Isobar_Newsletter::css/magnific-popup.css"/>
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Isobar\Newsletter\Block\NewsletterPopup" name="newsletter_popup" template="Isobar_Newsletter::newsletter_popup.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
