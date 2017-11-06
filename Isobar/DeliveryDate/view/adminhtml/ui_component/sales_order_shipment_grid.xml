@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="sales_order_shipment_columns">
+        <column name="delivery_date" class="Isobar\DeliveryDate\Ui\Component\Listing\Column\DeliveryDate">
+            <settings>
+                <label translate="true">Delivery Date</label>
+                <visible>true</visible>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="delivery_comment" class="Isobar\DeliveryDate\Ui\Component\Listing\Column\DeliveryComment">
+            <settings>
+                <label translate="true">Delivery Comment</label>
+                <visible>true</visible>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+    </columns>
+</listing>

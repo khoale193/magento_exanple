@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Isobar\Slider\Api\BannerRepositoryInterface"
+                type="Isobar\Slider\Model\BannerRepository" />
+
+    <preference for="Isobar\Slider\Api\Data\BannerInterface"
+                type="Isobar\Slider\Model\Banner" />
+
+    <preference for="Isobar\Slider\Api\Data\BannerSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="slider_banner_listing_data_source" xsi:type="string">Isobar\Slider\Model\ResourceModel\Banner\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--<type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Isobar\Slider\Api\Data\BannerInterface" xsi:type="string">Isobar\Slider\Api\BannerRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>-->
+
+    <type name="Isobar\Slider\Model\ResourceModel\Banner\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lakhoa_banner</argument>
+            <argument name="eventPrefix" xsi:type="string">slider_banner_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">slider_banner_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Isobar\Slider\Model\ResourceModel\Banner</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Isobar\Slider\BannerImageUpload" type="Isobar\Slider\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">slider/tmp/banners</argument>
+            <argument name="basePath" xsi:type="string">slider/banners</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Isobar\Slider\Controller\Adminhtml\Banners\Image\Upload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Isobar\Slider\BannerImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Isobar\Slider\Controller\Adminhtml\Banners\Save">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Isobar\Slider\BannerImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Isobar\Slider\Ui\Component\Listing\Columns\Thumbnail">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Isobar\Slider\BannerImageUpload</argument>
+        </arguments>
+    </type>
+    <type name="Isobar\Slider\Model\Banner\DataProvider">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Isobar\Slider\BannerImageUpload</argument>
+        </arguments>
+    </type>
+
+    <!-- Block -->
+    <type name="Isobar\Slider\Block\Banner">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Isobar\Slider\BannerImageUpload</argument>
+        </arguments>
+    </type>
+</config>

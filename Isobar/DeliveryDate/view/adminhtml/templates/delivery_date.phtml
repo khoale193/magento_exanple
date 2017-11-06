@@ -1,0 +1,28 @@
+<?php
+//get delivery date data
+$data = $block->getDeliveryDate();
+if ($data) { ?>
+    <section class="admin__page-section">
+        <div class="admin__page-section-title">
+            <span class="title">
+                <?= __('Delivery') ?>
+            </span>
+        </div>
+        <div class="admin__page-section-content">
+            <div class="admin__page-section-item">
+                <div class="admin__page-section-item-title">
+                    <span class="title">
+                        <?= __('Delivery Information') ?>
+                    </span>
+                </div>
+
+                <div class="admin__page-section-item-content">
+                    <strong>Delivery Date: </strong>
+                    <span><?= $data['delivery_date']; ?></span><br>
+                    <strong>Delivery Comment: </strong>
+                    <span style="word-wrap:break-word"><?= $data['delivery_comment']; ?></span>
+                </div>
+            </div>
+        </div>
+    </section>
+<?php } ?>

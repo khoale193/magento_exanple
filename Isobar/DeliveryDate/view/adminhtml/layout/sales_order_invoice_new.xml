@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="form">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Isobar_DeliveryDate::invoice/create/form.phtml</argument>
+            </action>
+
+            <block class="Isobar\DeliveryDate\Block\Order"
+                   name="isobar_delivery_date_invoice_create"
+                   template="delivery_date.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

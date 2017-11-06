@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Isobar\Repository\Api\EmployeeRepositoryInterface"
+                type="Isobar\Repository\Model\EmployeeRepository" />
+
+    <preference for="Isobar\Repository\Api\Data\EmployeeInterface"
+                type="Isobar\Repository\Model\Employee" />
+
+    <preference for="Isobar\Repository\Api\Data\EmployeeSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+
+</config>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">slider_banners_listing.slider_banner_listing_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/add"/>
+                <class>primary</class>
+                <label>Add New Banner</label>
+            </button>
+        </buttons>
+        <spinner>slider_banner_columns</spinner>
+        <deps>
+            <dep>slider_banners_listing.slider_banner_listing_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="slider_banner_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render" />
+        </settings>
+        <dataProvider class="Isobar\Slider\Ui\Component\DataProvider" name="slider_banner_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="slider/banners/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+            <action name="disable">
+                <settings>
+                    <url path="slider/banners/massDisable"/>
+                    <type>disable</type>
+                    <label translate="true">Disable</label>
+                </settings>
+            </action>
+            <action name="enable">
+                <settings>
+                    <url path="slider/banners/massEnable"/>
+                    <type>enable</type>
+                    <label translate="true">Enable</label>
+                </settings>
+            </action>
+        </massaction>
+    </listingToolbar>
+
+    <columns name="slider_banner_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="id" sortOrder="10">
+            <settings>
+                <label>ID</label>
+                <sorting>asc</sorting>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="image_destination" class="Isobar\Slider\Ui\Component\Listing\Columns\Thumbnail"
+            component="Magento_Ui/js/grid/columns/thumbnail" sortOrder="20">
+            <settings>
+                <label translate="true">Thumbnail</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="url" sortOrder="30">
+            <settings>
+                <label>URL</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="status" component="Magento_Ui/js/grid/columns/select" sortOrder="40">
+            <settings>
+                <options class="Isobar\Slider\Model\Banner\Source\IsActive" />
+                <dataType>select</dataType>
+                <label translate="true">Status</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="name" sortOrder="50">
+            <settings>
+                <label>Name</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="alt" sortOrder="60">
+            <settings>
+                <label>Alt</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+        <column name="orders" sortOrder="70">
+            <settings>
+                <label>Order</label>
+                <sortable>false</sortable>
+            </settings>
+        </column>
+
+        <actionsColumn name="actions" class="Isobar\Slider\Ui\Component\Listing\Column\PageActions" sortOrder="80">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

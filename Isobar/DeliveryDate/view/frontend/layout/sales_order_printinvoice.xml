@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="sales.order.print.invoice">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Isobar_DeliveryDate::order/print/invoice.phtml</argument>
+            </action>
+            <block class="Isobar\DeliveryDate\Block\Invoice"
+                   name="isobar_deliverydate_block_invoice"
+                   template="delivery_date.phtml" after="sales.order.print.invoice"/>
+        </referenceBlock>
+    </body>
+</page>

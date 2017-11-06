@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--add delivery date data for print pdf-->
+    <preference for="\Magento\Sales\Model\Order\Pdf\Invoice"
+                type="Isobar\DeliveryDate\Model\Order\Pdf\Invoice"/>
+    <preference for="\Magento\Sales\Model\Order\Pdf\Creditmemo"
+                type="Isobar\DeliveryDate\Model\Order\Pdf\Creditmemo"/>
+    <preference for="\Magento\Sales\Model\Order\Pdf\Shipment"
+                type="Isobar\DeliveryDate\Model\Order\Pdf\Shipment"/>
+</config>

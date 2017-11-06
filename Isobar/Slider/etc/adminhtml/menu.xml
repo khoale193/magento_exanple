@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Isobar_Slider::content_slider"
+             title="Slider" translate="title" module="Isobar_Slider" sortOrder="50"
+             parent="Magento_Backend::content"
+             resource="Magento_Backend::content" />
+
+        <add id="Isobar_Slider::content_slider_banner"
+             title="Banners" translate="Banners" module="Isobar_Slider" sortOrder="50"
+             parent="Isobar_Slider::content_slider"
+             resource="Magento_Backend::content"
+             action="slider/banners/index" />
+    </menu>
+</config>

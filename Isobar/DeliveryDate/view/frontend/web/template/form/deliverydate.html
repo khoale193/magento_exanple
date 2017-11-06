@@ -1,0 +1,23 @@
+<fieldset class="fieldset">
+    <div class="field">
+        <label class="label">Delivery Date</label>
+        <div class="control">
+            <input class="input-text"
+                   type="text"
+                   data-bind="datetimepicker: true, value: delivery_date"
+                   name="delivery_date"
+                   id="delivery_date"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <label class="label">Comment</label>
+        <div class="control">
+        <textarea name="delivery_comment"
+                  data-bind="value: delivery_comment, valueUpdate: 'keyup' "
+                  id="delivery_comment">
+        </textarea>
+        </div>
+    </div>
+</fieldset>

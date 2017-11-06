@@ -1,0 +1,31 @@
+<?php
+$banners = $block->getBanners();
+if (count($banners) > 0) {
+?>
+<div class="">
+    <ul class="bxslider">
+        <?php foreach ($banners as $index => $banner) { ?>
+            <?php if (isset($banner['image_destination'])) { ?>
+                <li title="">
+                    <a href="<?= $banner['image_destination']['href'] ?>">
+                        <img src="<?= $banner['image_destination']['src']; ?>" title="<?= $banner['name']; ?>" alt="<?= $banner['image_destination']['alt']; ?>"
+                             height="200px"/>
+                    </a>
+                </li>
+            <?php } ?>
+        <?php } ?>
+    </ul>
+</div>
+<?php } ?>
+<script type="text/javascript">
+    require(['jquery', 'banner_slider', 'jquery_easing'], function ($, bxSlider, easingJQuery) {
+        $(function () {
+            $('.bxslider').bxSlider({
+                mode: 'horizontal',
+                captions: true,
+                easing: 'easeOutElastic',
+                speed: 1000
+            });
+        });
+    });
+</script>
