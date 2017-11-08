@@ -2,7 +2,7 @@
 /** @var \Isobar\Newsletter\Block\NewsletterPopup $block */
 ?>
 
-<a data-fancybox data-src="#hidden-content-e" href="javascript:" id="isobar_newsletter_popup">Open demo</a>
+<a data-fancybox data-src="#hidden-content-e" href="javascript:" id="isobar_newsletter_popup"></a>
 <div class="block newsletter isobar_newsletter" style="display:none;width:40%;text-align:center" id="hidden-content-e">
     <div class="mfp-content">
         <div class="popup-content mfp-with-anim">
@@ -42,7 +42,6 @@
     require([
         'isobarNewsletterPopup'
     ], function (isobarNewsletterPopup) {
-
         isobarNewsletterPopup.displayTemplate('#isobar_newsletter_popup');
     });
 </script>

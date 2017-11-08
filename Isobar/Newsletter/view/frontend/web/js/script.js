@@ -1,7 +1,7 @@
 define([
     'jquery',
     'isobarNewsletterFancybox'
-], function ($) {
+], function ($, fancybox) {
     "use strict";
 
     var isobarNewsletter = {
@@ -11,9 +11,12 @@ define([
             var name = this.cookieName;
             var nameEQ = escape(name) + "=";
             var ca = document.cookie.split(';');
+
             for (var i = 0; i < ca.length; i++) {
                 var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1, c.length);
+                }
                 if (c.indexOf(nameEQ) == 0) {
                     return unescape(c.substring(nameEQ.length, c.length));
                 }
@@ -28,22 +31,19 @@ define([
 
             var date = new Date();
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            // console.log(date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)))
+
             var expires = "; expires=" + date.toGMTString();
 
             document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
-            console.log(expires)
         }
     };
 
     return {
         displayTemplate: function (element) {
-
             if (isobarNewsletter.getCookie() != 1) {
                 isobarNewsletter.createCookie();
                 $(element).click();
             }
-
         }
     };
 });
