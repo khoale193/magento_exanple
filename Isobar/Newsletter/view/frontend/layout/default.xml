@@ -9,8 +9,11 @@
         <referenceContainer name="before.body.end">
             <block class="Isobar\Newsletter\Block\NewsletterPopup" name="newsletter_popup" template="Isobar_Newsletter::newsletter_popup.phtml">
                 <block class="Magento\Theme\Block\Html\Header\Logo" name="isobar_newsletter_logo">
+                    <action method="setTemplate">
+                        <argument name="template" xsi:type="string">Isobar_Newsletter::html/header/logo.phtml</argument>
+                    </action>
                     <arguments>
-                        <argument name="logo_img_width" xsi:type="number">189</argument>
+                        <argument name="logo_img_width" xsi:type="number">150</argument>
                         <argument name="logo_img_height" xsi:type="number">64</argument>
                     </arguments>
                 </block>
