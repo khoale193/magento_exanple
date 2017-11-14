@@ -16,7 +16,6 @@
             </item>
         </item>
     </argument>
-
     <dataSource name="riki_wamb_rule_grid_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
@@ -25,16 +24,93 @@
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
-                    <item name="update_url" path="mui/index/render" xsi:type="url"/>
-                    <item name="storageConfig" xsi:type="array">
-                        <item name="indexField" xsi:type="string">rule_id</item>
-                    </item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
                 </item>
             </argument>
         </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
     </dataSource>
-
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+                <item name="stickyTmpl" xsi:type="string">ui/grid/sticky/toolbar</item>
+            </item>
+        </argument>
+        <component name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">riki_wamb_rule_index.riki_wamb_rule_index.riki_wamb_rule_columns</item>
+                    </item>
+                </item>
+            </argument>
+        </component>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">riki_wamb_rule_index.riki_wamb_rule_index.riki_wamb_rule_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">riki_wamb_rule_index.riki_wamb_rule_index.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">riki_wamb_rule_index.riki_wamb_rule_index.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">riki_wamb_rule_index.riki_wamb_rule_index.riki_wamb_rule_columns.${ $.index }:visible</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">product_listing.product_listing.product_columns.ids</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                    <item name="indexField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="confirm" xsi:type="array">
+                            <item name="title" xsi:type="string" translate="true">Delete items</item>
+                            <item name="message" xsi:type="string" translate="true">Delete selected items?</item>
+                        </item>
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="riki_wamb/rule/massDelete"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="selectProvider" xsi:type="string">riki_wamb_rule_index.riki_wamb_rule_index.riki_wamb_rule_columns.ids</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">riki_wamb_rule_index.riki_wamb_rule_index.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                </item>
+            </argument>
+        </paging>
+    </container>
     <columns name="riki_wamb_rule_columns">
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">
@@ -49,29 +125,16 @@
                     <item name="filter" xsi:type="string">text</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" translate="true" xsi:type="string">ID</item>
-                    <item name="sortOrder" xsi:type="number">1</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
                 </item>
             </argument>
         </column>
-        <!--<actionsColumn class="Riki\Wamb\Ui\Component\Listing\Column\RuleActions" name="actions">-->
-            <!--<argument name="data" xsi:type="array">-->
-                <!--<item name="config" xsi:type="array">-->
-                    <!--<item name="indexField" xsi:type="string">rule_id</item>-->
-                <!--</item>-->
-            <!--</argument>-->
-        <!--</actionsColumn>-->
         <column name="name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" translate="true" xsi:type="string">WAMB Rule Name</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="sortOrder" xsi:type="number">2</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
                 </item>
             </argument>
         </column>
@@ -81,8 +144,8 @@
                     <!--<item name="label" xsi:type="string" translate="true">Subscription course code</item>-->
                     <!--<item name="sortable" xsi:type="boolean">false</item>-->
                     <!--<item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>-->
-                    <!--<item name="sortOrder" xsi:type="number">3</item>-->
                     <!--<item name="filter" xsi:type="string">text</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">30</item>-->
                 <!--</item>-->
             <!--</argument>-->
         <!--</column>-->
@@ -92,8 +155,8 @@
                     <!--<item name="label" xsi:type="string" translate="true">Category</item>-->
                     <!--<item name="sortable" xsi:type="boolean">false</item>-->
                     <!--<item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>-->
-                    <!--<item name="sortOrder" xsi:type="number">4</item>-->
                     <!--<item name="filter" xsi:type="string">text</item>-->
+                    <!--<item name="sortOrder" xsi:type="number">40</item>-->
                 <!--</item>-->
             <!--</argument>-->
         <!--</column>-->
@@ -102,27 +165,30 @@
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="label" translate="true" xsi:type="string">Minimum purchase quantity</item>
-                    <item name="editor" xsi:type="array">
-                        <item name="editorType" xsi:type="string">text</item>
-                        <item name="validation" xsi:type="array">
-                            <item name="required-entry" xsi:type="boolean">true</item>
-                        </item>
-                    </item>
-                    <item name="sortOrder" xsi:type="number">5</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
                 </item>
             </argument>
         </column>
-        <!--<column name="is_active">-->
-            <!--<argument name="data" xsi:type="array">-->
-                <!--<item name="options" xsi:type="object">Riki\Wamb\Model\Config\Source\IsActive</item>-->
-                <!--<item name="config" xsi:type="array">-->
-                    <!--<item name="filter" xsi:type="string">select</item>-->
-                    <!--<item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>-->
-                    <!--<item name="dataType" xsi:type="string">select</item>-->
-                    <!--<item name="label" xsi:type="string" translate="true"> Active</item>-->
-                    <!--<item name="sortOrder" xsi:type="number">7</item>-->
-                <!--</item>-->
-            <!--</argument>-->
-        <!--</column>-->
+        <column name="is_active">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Riki\Wamb\Model\Rule\Source\IsActive</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="sortOrder" xsi:type="number">80</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn class="Riki\Wamb\Ui\Component\Listing\Column\RuleActions" name="actions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">rule_id</item>
+                    <item name="viewUrlPath" xsi:type="string">riki_wamb/rule/view</item>
+                    <item name="sortOrder" xsi:type="number">90</item>
+                </item>
+            </argument>
+        </actionsColumn>
     </columns>
 </listing>

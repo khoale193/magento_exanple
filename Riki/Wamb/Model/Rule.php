@@ -140,7 +140,20 @@ class Rule extends \Magento\Framework\Model\AbstractModel implements RuleInterfa
      */
     public function getCategoryIds()
     {
+        if ($this->hasData(self::CATEGORY_IDS)) {
+            return $this->getData(self::CATEGORY_IDS);
+        }
 
+        $conn = $this->getResource()->getConnection();
+        $select = $conn->select()
+            ->from($conn->getTableName('riki_wamb_rule_category'), ['category_id'])
+            ->where('rule_id = ?', (int)$this->getRuleId());
+
+        $result = $conn->fetchCol($select);
+
+        $this->setData(self::CATEGORY_IDS, $result);
+
+        return $result;
     }
 
     /**

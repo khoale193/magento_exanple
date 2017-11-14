@@ -2,7 +2,7 @@
 namespace Riki\Wamb\Setup;
 
 use Magento\Framework\Setup\InstallSchemaInterface;
-use \Magento\Framework\DB\Ddl\Table;
+use Magento\Framework\DB\Ddl\Table;
 
 class InstallSchema extends \Riki\Framework\Setup\Version\Schema implements InstallSchemaInterface
 {
