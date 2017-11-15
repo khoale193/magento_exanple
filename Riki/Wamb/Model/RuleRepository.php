@@ -50,7 +50,11 @@ class RuleRepository implements \Riki\Wamb\Api\RuleRepositoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Get Rule entity by [rule_id]
+     *
+     * @var int $ruleId
+     * @return \Riki\Wamb\Model\Rule
+     * @throws NoSuchEntityException
      */
     public function getById($ruleId)
     {
@@ -88,7 +92,7 @@ class RuleRepository implements \Riki\Wamb\Api\RuleRepositoryInterface
         }
         $collection->setCurPage($criteria->getCurrentPage());
         $collection->setPageSize($criteria->getPageSize());
-        
+
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setTotalCount($collection->getSize());

@@ -54,7 +54,7 @@ class Edit extends \Magento\Backend\App\Action
 //            $model->setData($data);
 //        }
 //
-//        $this->registry->register('current_wamb_rule', $model);
+        $this->registry->register('current_wamb_rule', $model);
         
         return $resultPage;
     }

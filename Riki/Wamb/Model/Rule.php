@@ -175,7 +175,20 @@ class Rule extends \Magento\Framework\Model\AbstractModel implements RuleInterfa
      */
     public function getCourseIds()
     {
-        // TODO: Implement getCourseIds() method.
+        if ($this->hasData(self::COURSE_IDS)) {
+            return $this->getData(self::COURSE_IDS);
+        }
+
+        $conn = $this->getResource()->getConnection();
+        $select = $conn->select()
+            ->from($conn->getTableName('riki_wamb_rule_course'), ['course_id'])
+            ->where('rule_id = ?', (int)$this->getRuleId());
+
+        $result = $conn->fetchCol($select);
+
+        $this->setData(self::COURSE_IDS, $result);
+
+        return $result;
     }
 
     /**
@@ -188,5 +201,18 @@ class Rule extends \Magento\Framework\Model\AbstractModel implements RuleInterfa
     public function setCourseIds($courseIds)
     {
         return $this->setData(self::COURSE_IDS, $courseIds);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return $this
+     */
+    public function _afterLoad()
+    {
+        $this->setOrigData('category_ids', $this->getCategoryIds());
+        $this->setOrigData('course_ids', $this->getCourseIds());
+
+        return parent::_afterLoad();
     }
 }

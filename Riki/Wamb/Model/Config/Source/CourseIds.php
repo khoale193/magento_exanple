@@ -15,7 +15,8 @@ class CourseIds extends \Riki\Framework\Model\Source\AbstractOption
      */
     public function __construct(
         \Riki\SubscriptionCourse\Model\CourseFactory $courseFactory
-    ){
+    )
+    {
         $this->courseFactory = $courseFactory; // Riki_SubscriptionCourse should support repository
     }
 

@@ -36,7 +36,6 @@ interface RuleRepositoryInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 
-
     /**
      * Delete
      *
@@ -68,5 +67,4 @@ interface RuleRepositoryInterface
      * @return \Riki\Wamb\Api\Data\RuleInterface
      */
     public function createFromArray($data = []);
-
 }

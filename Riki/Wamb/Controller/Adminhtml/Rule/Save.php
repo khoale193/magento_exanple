@@ -46,11 +46,14 @@ class Save extends Action
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
 
-        $data = $this->getRequest()->getPostValue();
-        $data['rule_id'] = isset($data['rule_id']) ? $data['rule_id'] : null;
-
-        $rule = $this->ruleFactory->create();
-        $rule->setData($data);
+        $postValue = $this->getRequest()->getPostValue();
+        $ruleId = isset($postValue['rule_id']) ? $postValue['rule_id'] : 0;
+        try {
+            $rule = $this->ruleRepository->getById($ruleId);
+        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+            $rule = $this->ruleRepository->createFromArray($postValue);
+        }
+        $rule->addData($postValue);
 
         $this->ruleRepository->save($rule);
         return $resultRedirect->setPath('*/*/');

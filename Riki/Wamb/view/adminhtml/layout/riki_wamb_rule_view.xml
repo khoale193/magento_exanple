@@ -3,10 +3,10 @@
     <head>
         <css src="Magento_Catalog::catalog/category-selector.css"/>
     </head>
+    <update handle="editor"/>
     <body>
         <referenceContainer name="content">
-            <block class="Riki\Wamb\Block\Adminhtml\Rule\Edit" name="riki_wamb_edit"/>
-            <block class="Magento\Catalog\Block\Adminhtml\Product\Edit\NewCategory" name="new-category" template="Magento_Catalog::catalog/product/edit/category/new/form.phtml"/>
+            <block class="Riki\Wamb\Block\Adminhtml\Rule\View" name="riki_amb_view"/>
         </referenceContainer>
     </body>
 </page>

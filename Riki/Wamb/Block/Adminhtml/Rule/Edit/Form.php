@@ -6,7 +6,7 @@ use Magento\Backend\Block\Widget\Form\Generic;
 class Form extends Generic
 {
     /**
-     * @var \Riki\Wamb\Model\Config\Source\IsActive
+     * @var \Riki\Wamb\Model\Rule\Source\IsActive
      */
     protected $isActiveSource;
 
@@ -57,7 +57,7 @@ class Form extends Generic
     protected function _prepareForm()
     {
         /** @var \Riki\Wamb\Model\Rule $model */
-//        $model = $this->_coreRegistry->registry('current_wamb_rule');
+        $model = $this->_coreRegistry->registry('current_wamb_rule');
 
         /** @var \Magento\Framework\Data\Form $form */
         $form = $this->_formFactory->create([
@@ -76,9 +76,9 @@ class Form extends Generic
             'class' => 'fieldset-wide'
         ]);
 
-//        if ($model->getRuleId()) {
-//            $fieldset->addField('rule_id', 'hidden', ['name' => 'rule_id']);
-//        }
+        if ($model->getRuleId()) {
+            $fieldset->addField('rule_id', 'hidden', ['name' => 'rule_id']);
+        }
 
         $fieldset->addField(
             'name',
@@ -103,20 +103,34 @@ class Form extends Generic
                 'options' => $this->isActiveSource->toArray(),
             ]
         );
-//        $fieldset->addField(
-//            'course_ids',
-//            'multiselect',
-//            [
-//                'label' => __('Subscription course code'),
-//                'note' => __('Course code - Course name'),
-//                'name' => 'course_ids[]',
-//                'required' => true,
-//                'scope' => 'store',
-//                'values' => $this->courseIdsSource->toOptionArray()
-//            ]
-//        );
 
-//        $fieldset->addType('category_type', 'Riki\Wamb\Block\Adminhtml\Product\Helper\Form\Category');
+        $fieldset->addField(
+            'course_ids',
+            'multiselect',
+            [
+                'label' => __('Subscription course code'),
+                'note' => __('Course code - Course name'),
+                'name' => 'course_ids[]',
+                'required' => true,
+                'scope' => 'store',
+                'values' => $this->courseIdsSource->toOptionArray()
+            ]
+        );
+
+        $fieldset->addType('category_type', 'Magento\Catalog\Block\Adminhtml\Product\Helper\Form\Category');
+        $fieldset->addField(
+            'category_ids',
+            'category_type',
+            [
+                'name' => 'category_ids',
+                'required' => true,
+                'class' => 'field-category_ids',
+                'id' => 'category_id',
+                'label' => __('Categories'),
+                'title' => __('Categories'),
+                'scope' => 'store'
+            ]
+        );
 
 //        $fieldset->addField(
 //            'category_ids',
@@ -147,8 +161,8 @@ class Form extends Generic
         );
 
         $this->setForm($form);
-//        $form->setValues($model->getData());
-//        $form->setDataObject($model);
+        $form->setValues($model->getData());
+        $form->setDataObject($model);
         $form->setUseContainer(true);
 
         return parent::_prepareForm();
